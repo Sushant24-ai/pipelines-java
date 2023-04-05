@@ -18,7 +18,4 @@ steps:
 
 - script: |
     ls $(System.DefaultWorkingDirectory)/
-  displayName: 'List contents of target directory''
-
-
-
+  displayName: 'List contents of target directory'
