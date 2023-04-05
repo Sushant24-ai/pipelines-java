@@ -1,10 +1,5 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
-- master
+- main
 
 pool:
   vmImage: ubuntu-latest
@@ -21,18 +16,21 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: PublishCodeCoverageResults@2
-  inputs:
-    summaryFileLocation: '**/surefire-reports/TEST-*.xml'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'sush24'
-    publishLocation: 'Container'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/*.jar'
+    ArtifactName: 'MyArtifact'
 
-
-- task: WhiteSource@21
+- task: JaCoCo@3
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)'
-    projectName: 'sush-mend'
+    classFilesDirectories: '**/target/classes'
+    sourceDirectories: '**/src/main/java'
+    inclusionFilters: '**/*'
+    outputDirectory: '$(System.DefaultWorkingDirectory)/jacoco'
+    reportBuildPolicy: 'IfSucceeded'
 
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/jacoco/jacoco.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/jacoco'
