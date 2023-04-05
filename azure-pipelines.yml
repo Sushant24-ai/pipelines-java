@@ -20,10 +20,5 @@ steps:
     ls $(System.DefaultWorkingDirectory)/
   displayName: 'List contents of target directory''
 
-- task: WhiteSource@21
-  inputs:
-    cwd: '$(System.DefaultWorkingDirectory)'
-    projectName: 'sush-mend'
-
 
 
