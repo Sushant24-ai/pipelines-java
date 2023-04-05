@@ -17,5 +17,5 @@ steps:
     goals: 'package'
 
 - script: |
-    ls $(System.DefaultWorkingDirectory)/
+    ls $(System.DefaultWorkingDirectory)/target
   displayName: 'List contents of target directory'
