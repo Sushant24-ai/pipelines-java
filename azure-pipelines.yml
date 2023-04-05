@@ -16,10 +16,9 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/*.jar'
-    ArtifactName: 'sush-Artifact'
+- script: |
+    ls $(System.DefaultWorkingDirectory)/
+  displayName: 'List contents of target directory''
 
 - task: WhiteSource@21
   inputs:
