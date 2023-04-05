@@ -21,13 +21,6 @@ steps:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/*.jar'
     ArtifactName: 'MyArtifact'
 
-- task: JaCoCo@3
-  inputs:
-    classFilesDirectories: '**/target/classes'
-    sourceDirectories: '**/src/main/java'
-    inclusionFilters: '**/*'
-    outputDirectory: '$(System.DefaultWorkingDirectory)/jacoco'
-    reportBuildPolicy: 'IfSucceeded'
 
 - task: PublishCodeCoverageResults@1
   inputs:
