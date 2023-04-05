@@ -23,5 +23,5 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'sush'
+    ArtifactName: 'sush24'
     publishLocation: 'Container'
