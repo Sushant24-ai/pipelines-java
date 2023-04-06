@@ -21,10 +21,10 @@ steps:
     ls -ltrh $(Build.ArtifactStagingDirectory)
   displayName: 'List contents of target directory'
 
- - task: PublishBuildArtifacts@1
-   inputs:
-     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
-     ArtifactName: 'SushArtifact'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
+    ArtifactName: 'SushArtifact'
  
   
 
