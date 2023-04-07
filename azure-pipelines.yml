@@ -25,6 +25,11 @@ steps:
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
     ArtifactName: 'SushArtifact'
+
+- task: WhiteSource@21
+  inputs:
+    cwd: '$(System.DefaultWorkingDirectory)'
+    
  
   
 
