@@ -30,20 +30,7 @@ steps:
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)'
 
-- task: JaCoCo@0
-  inputs:
-    classFilesDirectories: 'target/classes'
-    sourceDirectories: 'src/main/java'
-    exclusionFiles: |
-      **/*Test*.*
-      **/*test*.*
-    includeBranchCoverage: true
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/target/site/jacoco/jacoco.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/target/site/jacoco'
 
 
 
