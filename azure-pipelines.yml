@@ -19,7 +19,7 @@ steps:
 - script: |
     ls -ltrh $(System.DefaultWorkingDirectory)/target
     echo "new directory"
-    find $(System.DefaultWorkingDirectory)/target/ -name *.xml
+    find $(System.DefaultWorkingDirectory)/ -name "*.xml"
     echo "new line "
     ls -ltrh $(Build.ArtifactStagingDirectory)
   displayName: 'List contents of target directory'
