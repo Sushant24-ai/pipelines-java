@@ -19,7 +19,8 @@ steps:
 - script: |
     ls -ltrh $(System.DefaultWorkingDirectory)/target
     echo "new directory"
-    ls $(System.DefaultWorkingDirectory)/target/site
+    find $(System.DefaultWorkingDirectory)/target/ -name *.xml
+    echo "new line "
     ls -ltrh $(Build.ArtifactStagingDirectory)
   displayName: 'List contents of target directory'
 
