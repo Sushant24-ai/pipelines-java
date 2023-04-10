@@ -21,6 +21,10 @@ steps:
     ls -ltrh $(Build.ArtifactStagingDirectory)
   displayName: 'List contents of target directory'
 
+- script: |
+    mvn test
+  displayName: 'jacoco Test'
+   
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
