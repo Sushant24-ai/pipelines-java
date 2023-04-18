@@ -12,10 +12,10 @@ variables:
 steps:
 - task: Cache@2
   inputs:
-    key: 'maven | "$(Agent.OS)" | **/pom.xml'
+    key: 'sush24 | v1 | **/pom.xml'
     restoreKeys: |
-      maven | "$(Agent.OS)"
-      maven
+      sush24 | v1
+      sush24
     path: $(MAVEN_CACHE_FOLDER)
   displayName: Cache Maven local repo
 
