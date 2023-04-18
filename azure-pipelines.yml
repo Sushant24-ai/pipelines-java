@@ -28,9 +28,6 @@ steps:
     mvn test
   displayName: 'jacoco Test'
 
-- task: PublishCodeCoverageResults@2
-  inputs:
-    summaryFileLocation: '/home/vsts/work/1/s/target/surefire-reports/TEST-MyTest.xml'
    
 - task: PublishBuildArtifacts@1
   inputs:
