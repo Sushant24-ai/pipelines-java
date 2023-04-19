@@ -15,7 +15,6 @@ jobs:
 
 - job: Test
   displayName: 'Test'
-  dependsOn: Build
   pool:
     vmImage: 'ubuntu-latest'
   steps:
@@ -24,7 +23,6 @@ jobs:
 
 - job: Deploy
   displayName: 'Deploy'
-  dependsOn: Build
   pool:
     vmImage: 'ubuntu-latest'
   steps:
