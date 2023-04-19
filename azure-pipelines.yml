@@ -1,66 +1,34 @@
 trigger:
-- main
+  branches:
+    exclude:
+      - "*"
 
-pool:
-  vmImage: ubuntu-latest
+jobs:
+- job: Build
+  displayName: 'Build'
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - checkout: self
+  - script: mvn clean install -B
+    displayName: 'Build Step'
 
-variables:
-  MAVEN_CACHE_FOLDER: $(Pipeline.Workspace)/.m2/repository
-  MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+- job: Test
+  displayName: 'Test'
+  dependsOn: Build
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - script: mvn test
+    displayName: 'Test Step'
 
-
-steps:
-- task: Cache@2
-  inputs:
-    key: 'sush24 | v1 | **/pom.xml'
-    restoreKeys: |
-      sush24 | v1
-      sush24
-    path: $(MAVEN_CACHE_FOLDER)
-  displayName: Cache Maven local repo
-
-- script: mvn install -B -e
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m $(MAVEN_OPTS)'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean package'
-
-- script: |
-    ls -ltrh $(System.DefaultWorkingDirectory)/target
-    echo "new directory"
-    find $(System.DefaultWorkingDirectory)/ -name "*.xml"
-    echo "new line "
-    ls -ltrh $(Build.ArtifactStagingDirectory)
-  displayName: 'List contents of target directory'
-
-- script: |
-    mvn test
-  displayName: 'jacoco Test'
-
-   
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/target/helloworld.war'
-    ArtifactName: 'SushArtifact'
-
-- task: WhiteSource@21
-  inputs:
-    cwd: '$(System.DefaultWorkingDirectory)'
-
-
-
-
-
-
-    
- 
-  
-
-
-
+- job: Deploy
+  displayName: 'Deploy'
+  dependsOn: Build
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - script: echo 'Deploying to staging environment...'
+    displayName: 'Deploy to Staging'
+  - script: echo 'Deploying to production environment...'
+    displayName: 'Deploy to Production'
